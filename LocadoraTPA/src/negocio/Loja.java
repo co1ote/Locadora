@@ -106,7 +106,15 @@ public class Loja {
         }
         return false;
     }
-
+    public boolean existeAluguel(String cpf, String chassi){
+        for(int i= 0; i < locacoes.size();i++){
+            if(locacoes.get(i).getCarro().getChassi().equals(chassi) && locacoes.get(i).getLocador().getCpf().equals(cpf) ) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
     public String editarCarro(String chassi,float diaria, String cor, String modelo, String placa, int ano){
         for(int i= 0; i < carros.size();i++){
             if(carros.get(i).getChassi().equals(chassi)){
@@ -152,8 +160,38 @@ public class Loja {
     public ArrayList<Cliente> getClientes() {
         return clientes;
     }
+    public Cliente getCliente(String cpf) {
+        for(int i= 0; i < clientes.size();i++){
+            if(clientes.get(i).getCpf().equals(cpf)) {
+               Cliente cliente = new Cliente(clientes.get(i).getNome(), clientes.get(i).getCpf(), clientes.get(i).getAnoCNH(), clientes.get(i).getAnoValidadeCNH());
+               
+               cliente.setEndereco(clientes.get(i).getEndereco());
+               cliente.setTelefone(clientes.get(i).getTelefone());
+                
+               return clientes.get(i);
+            }
+        }
+        return null;
+    }
     public ArrayList<Carro> getCarros() {
         return carros;
+    }
+    public Carro getCarro(String chassi){
+        
+        for(int i= 0; i < carros.size();i++){
+            if(carros.get(i).getChassi().equals(chassi)) {
+               Carro carro = new Carro(carros.get(i).getChassi(), carros.get(i).getDiaria());
+               
+               carro.setAlugado(carros.get(i).isAlugado());
+               carro.setAno(carros.get(i).getAno());
+               carro.setCor(carros.get(i).getCor());
+               carro.setModelo(carros.get(i).getModelo());
+               carro.setPlaca(carros.get(i).getPlaca());
+                
+               return carros.get(i);
+            }
+        }
+        return null;
     }
     public ArrayList<Aluguel> getLocacoes() {
         return locacoes;
@@ -177,4 +215,6 @@ public class Loja {
         }
         return gerentes;
     }
+
+    
 }

@@ -12,13 +12,6 @@ public class Cliente extends Pessoa {
         setAnoCNH(anoCNH);
 	setAnoValidadeCNH(anoValidadeCNH);
     }
-	
-    private Boolean validouNome(String nome) {
-	if (!nome.isEmpty() && nome.contains(" "))
-		return true;
-	return false;
-    }
-	
     public String getEndereco() {
         return this.endereco;
     }

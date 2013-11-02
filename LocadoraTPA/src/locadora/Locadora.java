@@ -1,6 +1,7 @@
 package locadora;
 
 import java.util.ArrayList;
+import negocio.Aluguel;
 import negocio.Atendente;
 import negocio.Carro;
 import negocio.Cliente;
@@ -207,23 +208,57 @@ public class Locadora {
     }
     public static void gerenciarAlugueis() {
         int opcao;
-        ArrayList<Funcionario> funcionarios;
+        
         while (true) {
-            opcao = menu.menuFuncionario();
+            opcao = menu.menuAlugueis();
+            String cpf;
+            String chassi;
+            int dias;
             switch(opcao) {
                 case 1:
-                    gerenciarAtendente();
+                    System.out.print("Digite o cpf: ");
+                    cpf = menu.scan.next();
+                    Cliente cliente = loja.getCliente(cpf);
+                    if(cliente == null) 
+                    {
+                        System.out.print("ERRO 404");
+                        menu.scan.next();
+                        break;
+                    }
+                    
+                    System.out.print("Digite o chassi: ");
+                    chassi = menu.scan.next();
+                    Carro carro = loja.getCarro(chassi);
+                    if(carro == null){
+                        System.out.print("ERRO 404");
+                        menu.scan.next();
+                        break;
+                    }
+                    System.out.print("Digite o dias: ");
+                    dias = menu.scan.nextInt();
+                    loja.adcionarLocacao(carro, cliente, dias);
                     break;
                 case 2:
-                    gerenciarGerente();
+                    System.out.print("Digite o cpf: ");
+                    cpf = menu.scan.next();
+                    System.out.print("Digite o chassi: ");
+                    chassi = menu.scan.next();  
+                    if(loja.existeAluguel(cpf, chassi)){
+                        System.out.print("ERRO 404");
+                        menu.scan.next();
+                        break;
+                    }
+                    
+                    loja.removerLocacao(cpf, chassi);
                     break;
                 case 3:
-                    funcionarios = loja.getFuncionarios();
-                    for (int i=0; i < funcionarios.size(); i++) {
+                    ArrayList<Aluguel> locacoes = loja.getLocacoes();
+                    for (int i=0; i < locacoes.size(); i++) {
                         System.out.println(i);
-                        System.out.println("Cpf : " +  funcionarios.get(i).getCpf());
-                        System.out.println("Nome : " + funcionarios.get(i).getNome());
-                        System.out.println("Salário base : + " + funcionarios.get(i).getSalario_base());
+                        System.out.println("Cpf : " +  locacoes.get(i).getLocador().getCpf());
+                        System.out.println("Chassi : " + locacoes.get(i).getCarro().getChassi());
+                        System.out.println("Data de entrega : " + locacoes.get(i).getDataEntrega());
+                        System.out.println("Valor total: " + locacoes.get(i).getValorTotal());
                     }
                     break;
                 case 4:
@@ -283,7 +318,7 @@ public class Locadora {
                         System.out.println("Telefone: " + a.getTelefone());
                         System.out.println("Salário base: " + a.getSalario_base());
                         System.out.println("Salário : " + a.calculaGanho());
-                        System.out.println("Qnt de vendas : " + a.getQnt_vendas());
+                        System.out.println("Qnt de vendas : " + a.getQnt_alugueis());
                     }
                     break;
                 case 5:
