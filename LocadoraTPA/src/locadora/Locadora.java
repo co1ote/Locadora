@@ -176,21 +176,10 @@ public class Locadora {
             opcao = menu.menuFuncionario();
             switch(opcao) {
                 case 1:
-                    System.out.print("Digite o cpf :");
-                    cpf = menu.scan.next();
-                    System.out.print("Digite o nome :");
-                    nome = menu.scan.next();
-                    System.out.print("Digite o ano da CNH :");
-                    anoCNH = menu.scan.nextInt();
-                    System.out.print("Digite o ano da validade da CNH :");
-                    anoValidadeCNH = menu.scan.nextInt();
-                    Cliente cliente = new Cliente(nome, cpf, anoCNH, anoValidadeCNH);
-                    loja.adcionarCliente(cliente);
+                    gerenciarAtendente();
                     break;
                 case 2:
-                    System.out.print("Digite o cpf :");
-                    cpf = menu.scan.next();
-                    loja.removerCliente(cpf);
+                    gerenciarGerente();
                     break;
                 case 3:
                     funcionarios = loja.getFuncionarios();
@@ -243,7 +232,7 @@ public class Locadora {
                     cpf = menu.scan.next();
                     System.out.print("Digite o chassi: ");
                     chassi = menu.scan.next();  
-                    if(loja.existeAluguel(cpf, chassi)){
+                    if(!loja.existeAluguel(cpf, chassi)){
                         System.out.print("ERRO 404");
                         menu.scan.next();
                         break;
@@ -348,7 +337,7 @@ public class Locadora {
         int banco_horas;
         ArrayList<Funcionario> gerentes;
         while (true) {
-            opcao = menu.menuAtendentes();
+            opcao = menu.menuGerentes();
             switch (opcao) {
                 case 1:
                     System.out.print("Digite o cpf :");

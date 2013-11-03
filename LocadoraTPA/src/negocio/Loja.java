@@ -210,11 +210,9 @@ public class Loja {
     public ArrayList<Funcionario> getGerentes() {
         ArrayList<Funcionario> gerentes = new ArrayList<Funcionario>();
         for (int i=0; i < funcionarios.size(); i++) {
-            if (funcionarios.get(i).getCodigo() == 1)
+            if (funcionarios.get(i).getCodigo() == 0)
                 gerentes.add(funcionarios.get(i));
         }
         return gerentes;
     }
-
-    
 }

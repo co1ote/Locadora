@@ -48,7 +48,7 @@ public class Menu {
         System.out.println("|        1 - Novo cliente                |");
         System.out.println("|        2 - Excluir cliente             |");
         System.out.println("|        3 - Editar cliente              |");
-        System.out.println("|        4 - Listar carros               |");
+        System.out.println("|        4 - Listar cliente              |");
         System.out.println("|        5 - Voltar                      |");
         System.out.println("+----------------------------------------+");
         opcao = scan.nextInt();

@@ -18,12 +18,12 @@ public class Aluguel {
     }
 
     private void calculaValorTotal() {
-        long dias = (getDataEntrega().getTime() - getDataEntrega().getTime())*60*1000*60*24;
-	this.valorTotal = dias*carro.getDiaria();
+        long dias = (getDataEntrega().getTime() - getDataInicio().getTime())/(60*1000*60*24) + 1;
+	this.valorTotal = dias*(carro.getDiaria());
     }
 	
     public float getValorTotal() {
-	calculaValorTotal();
+	//calculaValorTotal();
 	return valorTotal;
     }
     public Date getDataInicio() {
