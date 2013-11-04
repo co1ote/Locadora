@@ -8,7 +8,6 @@ import negocio.Cliente;
 import negocio.Funcionario;
 import negocio.Gerente;
 import negocio.Loja;
-import negocio.NaoEncontradoException;
 
 public class Locadora {
     public static Menu menu;
@@ -60,18 +59,12 @@ public class Locadora {
                 case 2:
                     System.out.print("Digite o chassi :");
                     chassi = menu.scan.next();
-                    try {
-                        loja.existeCarro(chassi);
-                        loja.removerCarro(chassi);
-                    } catch (NaoEncontradoException ex) {
-                        System.out.println(ex + ": Carro");
-                    }
+                    loja.removerCarro(chassi);
                     break;
                 case 3:
                     System.out.print("Digite o chassi :");
                     chassi = menu.scan.next();
-                    try {
-                        loja.existeCarro(chassi);
+                    if (loja.existeCarro(chassi)) {
                         System.out.print("Digite o chassi :");
                         chassi = menu.scan.next();
                         System.out.print("Digite o modelo :");
@@ -85,9 +78,8 @@ public class Locadora {
                         System.out.print("Digite o ano :");
                         ano = menu.scan.nextInt();
                         loja.editarCarro(chassi, diaria, cor, modelo, placa, ano);
-                    } catch (NaoEncontradoException ex) {
-                        System.out.println(ex + ": Carro");
-                    }
+                    } else
+                        System.out.println("NÃO FOI ENCONTRADO");
                     break;
                 case 4:
                     carros = loja.getCarros();
@@ -133,18 +125,12 @@ public class Locadora {
                 case 2:
                     System.out.print("Digite o cpf :");
                     cpf = menu.scan.next();
-                    try {
-                        loja.existeCliente(cpf);
-                        loja.removerCliente(cpf);
-                    } catch (NaoEncontradoException ex) {
-                        System.out.println(ex + ": Cliente");
-                    }
+                    loja.removerCliente(cpf);
                     break;
                 case 3:
                     System.out.print("Digite o cpf :");
                     cpf = menu.scan.next();
-                    try {
-                        loja.existeCliente(cpf);
+                    if (loja.existeCliente(cpf)) {
                         System.out.print("Digite o cpf :");
                         cpf = menu.scan.next();
                         System.out.print("Digite o nome :");
@@ -158,9 +144,8 @@ public class Locadora {
                         System.out.print("Digite o ano de validade da CNH :");
                         anoValidadeCNH = menu.scan.nextInt();
                         loja.editarCliente(cpf, nome, telefone, endereco, anoCNH, anoValidadeCNH);
-                    } catch (NaoEncontradoException ex) {
-                        System.out.println(ex + ":Cliente");
-                    }
+                    } else
+                        System.out.println("NÃO FOI ENCONTRADO");
                     break;
                 case 4:
                     clientes = loja.getClientes();
@@ -215,47 +200,37 @@ public class Locadora {
                 case 1:
                     System.out.print("Digite o cpf: ");
                     cpf = menu.scan.next();
-                    Cliente cliente;
-                    try {
-                        loja.existeCliente(cpf);
-                        cliente = loja.getCliente(cpf);
-                    } catch (NaoEncontradoException ex) {
-                        System.out.println(ex + ": Cliente");
+                    Cliente cliente = loja.getCliente(cpf);
+                    if(cliente == null) 
+                    {
+                        System.out.print("ERRO 404");
+                        menu.scan.next();
                         break;
                     }
                     
                     System.out.print("Digite o chassi: ");
                     chassi = menu.scan.next();
-                    Carro carro;
-                    try {
-                        loja.existeCarro(chassi);
-                        carro = loja.getCarro(chassi);
-                    } catch (NaoEncontradoException ex) {
-                        System.out.println(ex + ": Carro");
+                    Carro carro = loja.getCarro(chassi);
+                    if(carro == null){
+                        System.out.print("ERRO 404");
+                        menu.scan.next();
                         break;
                     }
-
-                    System.out.print("Digite os dias: ");
+                    System.out.print("Digite o dias: ");
                     dias = menu.scan.nextInt();
-                    try {
-                        loja.naoExisteAluguel(cpf, chassi);
-                        loja.adcionarLocacao(carro, cliente, dias);
-                    } catch (NaoEncontradoException ex) {
-                         System.out.println(ex + ": Aluguel já existe");
-                    }
+                    loja.adcionarLocacao(carro, cliente, dias);
                     break;
                 case 2:
                     System.out.print("Digite o cpf: ");
                     cpf = menu.scan.next();
                     System.out.print("Digite o chassi: ");
-                    chassi = menu.scan.next();
-                    try {
-                        loja.naoExisteAluguel(cpf, chassi);
-                    } catch (NaoEncontradoException ex) {
-                        System.out.println(ex + ": Já existe aluguel");
+                    chassi = menu.scan.next();  
+                    if(!loja.existeAluguel(cpf, chassi)){
+                        System.out.print("ERRO 404");
+                        menu.scan.next();
                         break;
                     }
-                                       
+                    
                     loja.removerLocacao(cpf, chassi);
                     break;
                 case 3:
@@ -296,18 +271,12 @@ public class Locadora {
                 case 2:
                     System.out.print("Digite o cpf :");
                     cpf = menu.scan.next();
-                    try {
-                        loja.existeFuncionario(cpf);
-                        loja.removerFuncionario(cpf);
-                    } catch (NaoEncontradoException ex) {
-                        System.out.println(ex + ": Atendente");
-                    }
+                    loja.removerFuncionario(cpf);
                     break;
                 case 3:
                     System.out.print("Digite o cpf :");
                     cpf = menu.scan.next();
-                    try {
-                        loja.existeFuncionario(cpf);
+                    if (loja.existeFuncionario(cpf)) {
                         System.out.print("Digite o cpf :");
                         cpf = menu.scan.next();
                         System.out.print("Digite o nome :");
@@ -317,9 +286,8 @@ public class Locadora {
                         System.out.print("Digite o salário base :");
                         salario_base = menu.scan.nextFloat();
                         loja.editarFuncionario(cpf, nome, telefone, salario_base);
-                    } catch (NaoEncontradoException ex) {
-                        System.out.println(ex + ": Atendente");
-                    }
+                    } else
+                        System.out.println("NÃO FOI ENCONTRADO");
                     break;
                 case 4:
                     atendentes = loja.getAtendentes();
@@ -373,18 +341,12 @@ public class Locadora {
                 case 2:
                     System.out.print("Digite o cpf :");
                     cpf = menu.scan.next();
-                    try {
-                        loja.existeFuncionario(cpf);
-                        loja.removerFuncionario(cpf);
-                    } catch (NaoEncontradoException ex) {
-                        System.out.println(ex + ": Gerente");
-                    }
+                    loja.removerFuncionario(cpf);
                     break;
                 case 3:
                     System.out.print("Digite o cpf :");
                     cpf = menu.scan.next();
-                    try {
-                        loja.existeFuncionario(cpf);
+                    if (loja.existeFuncionario(cpf)) {
                         System.out.print("Digite o cpf :");
                         cpf = menu.scan.next();
                         System.out.print("Digite o nome :");
@@ -394,9 +356,8 @@ public class Locadora {
                         System.out.print("Digite o salário base :");
                         salario_base = menu.scan.nextFloat();
                         loja.editarFuncionario(cpf, nome, telefone, salario_base);
-                    } catch (NaoEncontradoException ex) { 
-                        System.out.println(ex + ": Gerente");
-                    }
+                    } else
+                        System.out.println("NÃO FOI ENCONTRADO");
                     break;
                 case 4:
                     gerentes = loja.getGerentes();

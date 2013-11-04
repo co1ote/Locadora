@@ -20,9 +20,11 @@ public class Loja {
     public void adcionarCarro(Carro carro) {
         carros.add(carro);
     }
+
     public void adcionarCliente(Cliente cliente) {
         clientes.add(cliente);
     }
+
     public void adcionarLocacao(Carro carro, Cliente locador, int dias) {
         Date dataEntrega = new Date();
         dataEntrega.setTime(dataEntrega.getTime() + dias * 60 * 1000 * 60 * 24);
@@ -30,9 +32,11 @@ public class Loja {
         locacoes.add(aluguel);
         carro.setAlugado(true);
     }
+
     public void adcionarFuncionario(Atendente vendedor) {
         funcionarios.add(vendedor);
     }
+
     public void adcionarFuncionario(Gerente gerente) {
         funcionarios.add(gerente);
     }
@@ -46,6 +50,7 @@ public class Loja {
         }
         return "NÃO FOI ENCONTRADO";
     }
+
     public String removerCliente(String cpf) {
         for (Cliente c : clientes) {
             if (c.getCpf().equals(cpf)) {
@@ -55,6 +60,7 @@ public class Loja {
         }
         return "NÃO FOI ENCONTRADO";
     }
+
     public String removerLocacao(String cpf, String chassi) {
         for (Aluguel a : locacoes) {
             if (a.getCarro().getChassi().equals(chassi) && a.getLocador().getCpf().equals(cpf)) {
@@ -69,6 +75,7 @@ public class Loja {
         }
         return "NÃO FOI ENCONTRADO";
     }
+
     public String removerFuncionario(String cpf) {
         for (Funcionario f : funcionarios) {
             if (f.getCpf().equals(cpf)) {
@@ -79,37 +86,40 @@ public class Loja {
         return "NÃO FOI ENCONTRADO";
     }
 
-    public boolean existeCarro(String chassi) throws NaoEncontradoException {
+    public boolean existeCarro(String chassi) {
         for (Carro c : carros) {
             if (c.getChassi().equals(chassi)) {
                 return true;
             }
         }
-        throw new NaoEncontradoException();
+        return false;
     }
-    public boolean existeCliente(String cpf) throws NaoEncontradoException {
+
+    public boolean existeCliente(String cpf) {
         for (Cliente c : clientes) {
             if (c.getCpf().equals(cpf)) {
                 return true;
             }
         }
-        throw new NaoEncontradoException();
+        return false;
     }
-    public boolean existeFuncionario(String cpf) throws NaoEncontradoException {
+
+    public boolean existeFuncionario(String cpf) {
         for (Funcionario f : funcionarios) {
             if (f.getCpf().equals(cpf)) {
                 return true;
             }
         }
-        throw new NaoEncontradoException();
+        return false;
     }
-    public boolean naoExisteAluguel(String cpf, String chassi) throws NaoEncontradoException {
+
+    public boolean existeAluguel(String cpf, String chassi) {
         for (Aluguel a : locacoes) {
             if (a.getCarro().getChassi().equals(chassi) && a.getLocador().getCpf().equals(cpf)) {
-                throw new NaoEncontradoException();
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     public String editarCarro(String chassi, float diaria, String cor, String modelo, String placa, int ano) {
@@ -126,6 +136,7 @@ public class Loja {
         }
         return "ERRO AO EDITAR";
     }
+
     public String editarCliente(String cpf, String nome, String telefone, String endereco, int anoCNH, int validadeCNH) {
         for (Cliente c : clientes) {
             if (c.getCpf().equals(cpf)) {
@@ -140,6 +151,7 @@ public class Loja {
         }
         return "EDITADO COM SUCESSO";
     }
+
     public String editarFuncionario(String cpf, String nome, String telefone, float salario_base) {
         for (Funcionario f : funcionarios) {
             if (f.getCpf().equals(cpf)) {
@@ -155,6 +167,7 @@ public class Loja {
     public ArrayList<Cliente> getClientes() {
         return clientes;
     }
+
     public Cliente getCliente(String cpf) {
         for (Cliente c : clientes) {
             if (c.getCpf().equals(cpf)) {
@@ -167,6 +180,7 @@ public class Loja {
     public ArrayList<Carro> getCarros() {
         return carros;
     }
+
     public Carro getCarro(String chassi) {
         for (Carro c : carros) {
             if (c.getChassi().equals(chassi)) {
@@ -175,12 +189,15 @@ public class Loja {
         }
         return null;
     }
+
     public ArrayList<Aluguel> getLocacoes() {
         return locacoes;
     }
+
     public ArrayList<Funcionario> getFuncionarios() {
         return funcionarios;
     }
+
     public ArrayList<Atendente> getAtendentes() {
         ArrayList<Atendente> atendentes = new ArrayList<Atendente>();
         for (Funcionario f : funcionarios) {
@@ -190,6 +207,7 @@ public class Loja {
         }
         return atendentes;
     }
+
     public ArrayList<Gerente> getGerentes() {
         ArrayList<Gerente> gerentes = new ArrayList<Gerente>();
         for (Funcionario f : funcionarios) {
