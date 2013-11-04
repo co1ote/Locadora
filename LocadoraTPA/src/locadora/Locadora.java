@@ -83,15 +83,14 @@ public class Locadora {
                     break;
                 case 4:
                     carros = loja.getCarros();
-                    for (int i=0; i < carros.size(); i++) {
-                        System.out.println(i);
-                        System.out.println("Chassi: " + carros.get(i).getChassi());
-                        System.out.println("Diaria: " + carros.get(i).getDiaria());
-                        System.out.println("Alugado: " + carros.get(i).isAlugado());
-                        System.out.println("Modelo: " + carros.get(i).getModelo());
-                        System.out.println("Cor: " + carros.get(i).getCor());
-                        System.out.println("Placa: " + carros.get(i).getPlaca());
-                        System.out.println("Ano: " + carros.get(i).getAno());
+                    for (Carro c : carros) {
+                        System.out.println("Chassi: " + c.getChassi());
+                        System.out.println("Diaria: " + c.getDiaria());
+                        System.out.println("Alugado: " + c.isAlugado());
+                        System.out.println("Modelo: " + c.getModelo());
+                        System.out.println("Cor: " + c.getCor());
+                        System.out.println("Placa: " + c.getPlaca());
+                        System.out.println("Ano: " + c.getAno());
                     }
                     break;
                 case 5:
@@ -150,14 +149,13 @@ public class Locadora {
                     break;
                 case 4:
                     clientes = loja.getClientes();
-                    for (int i=0; i < clientes.size(); i++) {
-                        System.out.println(i);
-                        System.out.println("Cpf: " + clientes.get(i).getCpf());
-                        System.out.println("Nome: " + clientes.get(i).getNome());
-                        System.out.println("Telefone: " + clientes.get(i).getTelefone());
-                        System.out.println("Endereço: " + clientes.get(i).getEndereco());
-                        System.out.println("Ano CNH: " + clientes.get(i).getAnoCNH());
-                        System.out.println("Ano validade CNH: " + clientes.get(i).getAnoValidadeCNH());
+                    for (Cliente c : clientes) {
+                        System.out.println("Cpf: " + c.getCpf());
+                        System.out.println("Nome: " + c.getNome());
+                        System.out.println("Telefone: " + c.getTelefone());
+                        System.out.println("Endereço: " + c.getEndereco());
+                        System.out.println("Ano CNH: " + c.getAnoCNH());
+                        System.out.println("Ano validade CNH: " + c.getAnoValidadeCNH());
                     }
                     break;
                 case 5:
@@ -167,10 +165,6 @@ public class Locadora {
     }
     public static void gerenciarFuncionarios() {
         int opcao;
-        String cpf;
-        String nome;
-        int anoCNH;
-        int anoValidadeCNH;
         ArrayList<Funcionario> funcionarios;
         while (true) {
             opcao = menu.menuFuncionario();
@@ -183,11 +177,10 @@ public class Locadora {
                     break;
                 case 3:
                     funcionarios = loja.getFuncionarios();
-                    for (int i=0; i < funcionarios.size(); i++) {
-                        System.out.println(i);
-                        System.out.println("Cpf : " +  funcionarios.get(i).getCpf());
-                        System.out.println("Nome : " + funcionarios.get(i).getNome());
-                        System.out.println("Salário base : + " + funcionarios.get(i).getSalario_base());
+                    for (Funcionario f : funcionarios) {
+                        System.out.println("Cpf : " +  f.getCpf());
+                        System.out.println("Nome : " + f.getNome());
+                        System.out.println("Salário base : " + f.getSalario_base());
                     }
                     break;
                 case 4:
@@ -242,12 +235,11 @@ public class Locadora {
                     break;
                 case 3:
                     ArrayList<Aluguel> locacoes = loja.getLocacoes();
-                    for (int i=0; i < locacoes.size(); i++) {
-                        System.out.println(i);
-                        System.out.println("Cpf : " +  locacoes.get(i).getLocador().getCpf());
-                        System.out.println("Chassi : " + locacoes.get(i).getCarro().getChassi());
-                        System.out.println("Data de entrega : " + locacoes.get(i).getDataEntrega());
-                        System.out.println("Valor total: " + locacoes.get(i).getValorTotal());
+                    for (Aluguel l : locacoes) {
+                        System.out.println("Cpf : " +  l.getLocador().getCpf());
+                        System.out.println("Chassi : " + l.getCarro().getChassi());
+                        System.out.println("Data de entrega : " + l.getDataEntrega());
+                        System.out.println("Valor total: " + l.getValorTotal());
                     }
                     break;
                 case 4:
@@ -261,8 +253,8 @@ public class Locadora {
         String cpf;
         String telefone;
         float salario_base;
-        int qnt_vendas;
-        ArrayList<Funcionario> atendentes;
+        int qnt_alugueis;
+        ArrayList<Atendente> atendentes;
         while (true) {
             opcao = menu.menuAtendentes();
             switch (opcao) {
@@ -299,29 +291,26 @@ public class Locadora {
                     break;
                 case 4:
                     atendentes = loja.getAtendentes();
-                    for (int i=0; i < atendentes.size(); i++) {
-                        Atendente a = (Atendente)atendentes.get(i);
-                        System.out.println(i);
+                    for (Atendente a : atendentes) {
                         System.out.println("Cpf: " + a.getCpf());
                         System.out.println("Nome: " + a.getNome());
                         System.out.println("Telefone: " + a.getTelefone());
                         System.out.println("Salário base: " + a.getSalario_base());
                         System.out.println("Salário : " + a.calculaGanho());
-                        System.out.println("Qnt de vendas : " + a.getQnt_alugueis());
+                        System.out.println("Qnt de aluguéis : " + a.getQnt_alugueis());
                     }
                     break;
                 case 5:
                     System.out.println("Digite o cpf");
                     cpf = menu.scan.next();
                     atendentes = loja.getAtendentes();
-                    for (int i=0; i < atendentes.size(); i++) {
-                        Atendente a = (Atendente)atendentes.get(i);
+                    for (Atendente a : atendentes) {
                         if (a.getCpf().equals(cpf)) {
                             System.out.println("Digite o número de vendas");
-                            qnt_vendas = menu.scan.nextInt();
-                            a.adcionarVendas(qnt_vendas);
+                            qnt_alugueis = menu.scan.nextInt();
+                            a.adcionarAluguel(qnt_alugueis);
                         }
-                    }                    
+                    }
                     break;
                 case 6:
                     return;
@@ -335,7 +324,7 @@ public class Locadora {
         String telefone;
         float salario_base;
         int banco_horas;
-        ArrayList<Funcionario> gerentes;
+        ArrayList<Gerente> gerentes;
         while (true) {
             opcao = menu.menuGerentes();
             switch (opcao) {
@@ -372,9 +361,7 @@ public class Locadora {
                     break;
                 case 4:
                     gerentes = loja.getGerentes();
-                    for (int i=0; i < gerentes.size(); i++) {
-                        Gerente g = (Gerente)gerentes.get(i);
-                        System.out.println(i);
+                    for (Gerente g : gerentes) {
                         System.out.println("Cpf: " + g.getCpf());
                         System.out.println("Nome: " + g.getNome());
                         System.out.println("Telefone: " + g.getTelefone());
@@ -387,8 +374,7 @@ public class Locadora {
                     System.out.println("Digite o cpf");
                     cpf = menu.scan.next();
                     gerentes = loja.getGerentes();
-                    for (int i=0; i < gerentes.size(); i++) {
-                        Gerente g = (Gerente)gerentes.get(i);
+                    for (Gerente g : gerentes) {
                         if (g.getCpf().equals(cpf)) {
                             System.out.println("Digite o número de horas extras");
                             banco_horas = menu.scan.nextInt();

@@ -5,7 +5,7 @@ public abstract class Pessoa {
     protected String nome;
     protected String telefone;
     
-    public Pessoa(String nome, String cpf) {
+    public Pessoa(String cpf, String nome) {
         setNome(nome);
         setCpf(cpf);
     }

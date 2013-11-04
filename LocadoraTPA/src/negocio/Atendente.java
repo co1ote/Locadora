@@ -12,8 +12,8 @@ public class Atendente extends Funcionario {
         return getSalario_base() + getQnt_alugueis()*25;
     }
     
-    public void adcionarVendas(int vendas) {
-        qnt_alugueis += vendas;
+    public void adcionarAluguel(int alugueis) {
+        qnt_alugueis += alugueis;
     }
     
     public int getQnt_alugueis() {

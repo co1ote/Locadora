@@ -78,7 +78,7 @@ public class Menu {
         System.out.println("|        2 - Demitir atendente           |");
         System.out.println("|        3 - Editar atendente            |");
         System.out.println("|        4 - Listar atendentes           |");
-        System.out.println("|        5 - Adcionar vendas             |");
+        System.out.println("|        5 - Adcionar aluguel            |");
         System.out.println("|        6 - Voltar                      |");
         System.out.println("+----------------------------------------+");
         opcao = scan.nextInt();
